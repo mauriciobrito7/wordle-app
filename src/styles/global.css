@@ -5,10 +5,24 @@
 :root {
   --primary: #6AAA64;
   --secondary: #CEB02C;
-  --white: #ffffff;
-  --black: #050607;
-  --neutral-gray: #939B9F;
-  --neutral-gray-dark: #818181;
+  --gray-100: #DADCE04D;
+  --gray-200: #939B9F4D;
+  --gray-300: #D3D6DA;
+  --gray-400: #939B9F;
+  --gray-500: #818181;
+  --black: #000000;
+  --white: #FFFFFF;
+  --white-100: #F3F3F3E3;
+  --white-200: #F9F9F9;
+  --white-300: #F3F3F3;
+  --base-100: #56575E;
+  --base-200: #202537;
+  --dark-100: #262B3CE3;
+  --dark-200: #262B3C;
+  --dark-gray-100: #565F7E;
+  --dark-gray-200: #939B9F33;
+  --dark-gray-300: #DADCE008;
+  --dark-base-100: #DADCE0;
   --8xl: 5.375rem;
   --7xl: 4.5rem;
   --6xl: 4.25rem;
@@ -22,6 +36,7 @@
   --base: 1rem;
   --sm: 0.875rem;
   --xs: 0.75rem;
+  --font-roboto: 'Roboto', sans-serif;
 }
 
 * {
@@ -44,7 +59,7 @@ body {
 }
 
 body {
-  font-family: var(--font-lato);
+  font-family: var(--font-roboto);
 }
 
 h1 {

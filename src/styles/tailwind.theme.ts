@@ -11,21 +11,39 @@ const customTheme = {
     colors: {
       primary: {
         DEFAULT: 'var(--primary)',
-      },
-      white: {
-        DEFAULT: 'var(--white)',
-      },
-      black: {
-        DEFAULT: 'var(--black)',
-        transparent: 'var(--black-transparent)',
-      },
-      neutral: {
-        gray: 'var(--neutral-gray)',
-        'gray-dark': 'var(--neutral-gray-dark)',
+        secondary: 'var(--secondary)',
+        gray: {
+          100: 'var(--gray-100)',
+          200: 'var(--gray-200)',
+          300: 'var(--gray-300)',
+          400: 'var(--gray-400)',
+          500: 'var(--gray-500)',
+        },
+        black: {
+          DEFAULT: 'var(--black)',
+        },
+        white: {
+          100: 'var(--white-100)',
+          200: 'var(--white-200)',
+          300: 'var(--white-300)',
+          DEFAULT: 'var(--white)',
+        },
+        base: {
+          100: 'var(--base-100)',
+          200: 'var(--base-200)',
+        },
+        dark: {
+          100: 'var(--dark-100)',
+          200: 'var(--dark-200)',
+          'gray-100': 'var(--dark-gray-100)',
+          'gray-200': 'var(--dark-gray-200)',
+          'gray-300': 'var(--dark-gray-300)',
+          'base-100': 'var(--dark-base-100)',
+        },
       },
     },
     fontFamily: {
-      lato: ['var(--font-lato)'],
+      roboto: ['var(--font-roboto)'],
     },
     fontSize: {
       '8xl': 'var(--8xl)',
