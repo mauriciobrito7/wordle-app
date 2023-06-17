@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #6AAA64;
+  --secondary: #CEB02C;
+  --white: #ffffff;
+  --black: #050607;
+  --neutral-gray: #939B9F;
+  --neutral-gray-dark: #818181;
+  --8xl: 5.375rem;
+  --7xl: 4.5rem;
+  --6xl: 4.25rem;
+  --4xl: 3.5rem;
+  --h2xl: 3.375rem;
+  --3xl: 2.625rem;
+  --subtext: 2.25rem;
+  --2xl: 2rem;
+  --xl: 1.5rem;
+  --lg: 1.125rem;
+  --base: 1rem;
+  --sm: 0.875rem;
+  --xs: 0.75rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-lato);
+}
+
+h1 {
+  font-size: var(--3xl);
+}
+
+h2 {
+  font-size: var(--subtext);
+}
+
+h3 {
+  font-size: var(--2xl);
+}
+
+h4 {
+  font-size: var(--xl);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a:focus,
+button:focus {
+  outline: none;
+  cursor: pointer;
+}
+
+a:active,
+button:active {
+  outline: none;
+}
