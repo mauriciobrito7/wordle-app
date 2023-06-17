@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #6AAA64;
+  --secondary: #CEB02C;
+  --gray-100: #DADCE04D;
+  --gray-200: #939B9F4D;
+  --gray-300: #D3D6DA;
+  --gray-400: #939B9F;
+  --gray-500: #818181;
+  --black: #000000;
+  --white: #FFFFFF;
+  --white-100: #F3F3F3E3;
+  --white-200: #F9F9F9;
+  --white-300: #F3F3F3;
+  --base-100: #56575E;
+  --base-200: #202537;
+  --dark-100: #262B3CE3;
+  --dark-200: #262B3C;
+  --dark-gray-100: #565F7E;
+  --dark-gray-200: #939B9F33;
+  --dark-gray-300: #DADCE008;
+  --dark-base-100: #DADCE0;
+  --8xl: 5.375rem;
+  --7xl: 4.5rem;
+  --6xl: 4.25rem;
+  --4xl: 3.5rem;
+  --h2xl: 3.375rem;
+  --3xl: 2.625rem;
+  --subtext: 2.25rem;
+  --2xl: 2rem;
+  --xl: 1.5rem;
+  --lg: 1.125rem;
+  --base: 1rem;
+  --sm: 0.875rem;
+  --xs: 0.75rem;
+  --font-roboto: 'Roboto', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-roboto);
+}
+
+h1 {
+  font-size: var(--3xl);
+}
+
+h2 {
+  font-size: var(--subtext);
+}
+
+h3 {
+  font-size: var(--2xl);
+}
+
+h4 {
+  font-size: var(--xl);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a:focus,
+button:focus {
+  outline: none;
+  cursor: pointer;
+}
+
+a:active,
+button:active {
+  outline: none;
+}
