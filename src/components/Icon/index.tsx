@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import CircleQuestionSVG from './icons/circle-question';
 import ChartSVG from './icons/chart';
+import DeleteSVG from './icons/delete';
 
 export enum IconSize {
   XSMALL = 'xsmall',
@@ -12,6 +13,7 @@ export enum IconSize {
 export enum IconType {
   CIRCLE_QUESTION = 'circle-question',
   CHART = 'chart',
+  DELETE = 'delete',
 }
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
@@ -34,6 +36,7 @@ export const icons: Record<
     <CircleQuestionSVG role="img" {...props} />
   ),
   chart: (props: any) => <ChartSVG role="img" {...props} />,
+  delete: (props: any) => <DeleteSVG role="img" {...props} />,
 };
 
 function Icon({ type, size = IconSize.MEDIUM, ...restProps }: IconProps) {

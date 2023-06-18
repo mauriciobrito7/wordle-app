@@ -40,6 +40,7 @@ function Header({ className, toggleDarkMode, isDarkMode }: HeaderProps) {
             className="hidden"
             name="switch"
             type="checkbox"
+            onChange={toggleDarkMode}
           />
           <span className="slider" />
         </label>
