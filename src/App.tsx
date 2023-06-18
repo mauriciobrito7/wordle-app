@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+
+import Header from './components/Header';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -13,9 +15,15 @@ function App() {
     }
   }, [darkMode]);
 
+  const toggleDarkMode = useCallback(() => {
+    setDarkMode(!darkMode);
+  }, [darkMode]);
+
   return (
-    <div className="h-full w-full transition-color transition-500 text-black bg-white-200 dark:bg-dark-200 dark:text-white">
-      <h1>Hello, world!</h1>
+    <div className="flex flex-col items-center h-full w-full transition-color transition-500 text-black bg-white-200 dark:bg-dark-200 dark:text-white">
+      <div className="flex flex-col w-full px-4 md:max-w-2xl mt-20 md:p-0">
+        <Header toggleDarkMode={toggleDarkMode} isDarkMode={darkMode} />
+      </div>
     </div>
   );
 }
