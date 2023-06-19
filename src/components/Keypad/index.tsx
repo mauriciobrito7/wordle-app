@@ -39,7 +39,7 @@ export default function Keypad({ usedKeys, handleClick }: KeypadProps) {
   ];
 
   return (
-    <div className="flex flex-wrap w-full px-5 py-8 rounded-2xl bg-white-300 text-base-100 dark:bg-dark-gray-300 dark:text-dark-base-100">
+    <div className="flex flex-wrap w-full px-5 py-8 mb-14 rounded-2xl bg-white-300 text-base-100 dark:bg-dark-gray-300 dark:text-dark-base-100">
       {rows.map((row: Key[], index: number) => {
         const rowKey = row.map((letter) => letter.key).join('');
 
@@ -58,6 +58,7 @@ export default function Keypad({ usedKeys, handleClick }: KeypadProps) {
                   onClick={() => handleClick(letter.key)}
                   type="button"
                   disabled={usedKeys && usedKeys[letter.key] === 'gray'}
+                  aria-describedby={letter.key}
                 >
                   {letter.key === 'delete' ? (
                     <Icon type={'delete' as IconType} size={IconSize.SMALL} />
@@ -73,3 +74,5 @@ export default function Keypad({ usedKeys, handleClick }: KeypadProps) {
     </div>
   );
 }
+
+Keypad.displayName = 'Keypad';

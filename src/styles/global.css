@@ -54,13 +54,20 @@
 }
 
 html,
-body,
-#root {
+body {
   height: 100%;
 }
 
 body {
   font-family: var(--font-roboto);
+  background: var(--white-200);
+  transition-property: background-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+body.dark {
+  background: var(--dark-200);
 }
 
 h1 {
@@ -104,9 +111,9 @@ button:active {
   label.switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
-    border-radius: 14px;
+    width: 3.75rem;
+    height: 2.125rem;
+    border-radius: 0.875rem;
   }
 
   label.switch.light {
@@ -128,7 +135,7 @@ button:active {
     bottom: 0;
     -webkit-transition: .4s;
     transition: .4s;
-    border-radius: 34px;
+    border-radius: 2.125rem;
   }
 
   .switch.light .slider {
