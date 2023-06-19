@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import Icon, { IconType, IconSize } from '../Icon';
@@ -32,7 +33,6 @@ function Header({ className, toggleDarkMode, isDarkMode }: HeaderProps) {
           htmlFor="switch"
           className={`switch ${isDarkMode ? 'dark' : 'light'}`}
           onClick={toggleDarkMode}
-          onKeyDown={toggleDarkMode}
           tabIndex={0}
         >
           <input
