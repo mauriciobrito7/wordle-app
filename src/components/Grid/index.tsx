@@ -99,3 +99,5 @@ export default function Grid({ guesses, currentGuess, turn }: GridProps) {
     </div>
   );
 }
+
+Grid.displayName = 'Grid';

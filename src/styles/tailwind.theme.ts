@@ -48,12 +48,45 @@ const customTheme = {
       sm: 'var(--sm)',
       xs: 'var(--xs)',
     },
-    transitionProperty: {
-      color: 'background-color',
+    height: {
+      100: '28rem', // 448px
+      104: '32rem', // 512px
+      108: '36rem', // 576px
+      112: '40rem', // 640px
+      116: '44rem', // 704px
+      120: '48rem', // 768px
+      124: '52rem', // 832px
+      128: '56rem', // 896px
     },
-    transitionDuration: {
-      '200': '0.2s',
-      '500': '0.5s',
+    width: {
+      100: '28rem', // 448px
+      104: '32rem', // 512px
+      108: '36rem', // 576px
+      112: '40rem', // 640px
+      116: '44rem', // 704px
+      120: '48rem', // 768px
+      124: '52rem', // 832px
+      128: '56rem', // 896px
+    },
+    minHeight: {
+      100: '28rem', // 448px
+      104: '32rem', // 512px
+      108: '36rem', // 576px
+      112: '40rem', // 640px
+      116: '44rem', // 704px
+      120: '48rem', // 768px
+      124: '52rem', // 832px
+      128: '56rem', // 896px
+    },
+    maxHeight: {
+      100: '28rem', // 448px
+      104: '32rem', // 512px
+      108: '36rem', // 576px
+      112: '40rem', // 640px
+      116: '44rem', // 704px
+      120: '48rem', // 768px
+      124: '52rem', // 832px
+      128: '56rem', // 896px
     },
   },
 };
