@@ -4,6 +4,7 @@ import useWordle from '../../hooks/useWordle';
 import Keypad from '../Keypad';
 import Grid from '../Grid';
 import Modal, { ModalSize } from '../Modal';
+import useStats from '../../hooks/useStats';
 
 interface WordleProps {
   solution: string;
@@ -20,6 +21,7 @@ export default function Wordle({ solution }: WordleProps) {
     handleClick,
   } = useWordle(solution);
   const [showModal, setShowModal] = useState(false);
+  const { incrementGamesPlayed, incrementVictories } = useStats();
 
   useEffect(() => {
     window.addEventListener('keyup', handleKeyup);
@@ -35,10 +37,14 @@ export default function Wordle({ solution }: WordleProps) {
   }, [handleKeyup, isCorrect, turn]);
 
   useEffect(() => {
-    if (isCorrect || turn > 5) {
+    if (isCorrect || turn > 5 || (!isCorrect && turn === 5)) {
       setShowModal(true);
+      incrementGamesPlayed();
+      if (isCorrect) {
+        incrementVictories();
+      }
     }
-  }, [isCorrect, turn]);
+  }, [isCorrect, turn, incrementGamesPlayed, incrementVictories]);
 
   return (
     <div className="w-full">
@@ -51,16 +57,16 @@ export default function Wordle({ solution }: WordleProps) {
       >
         {isCorrect && (
           <div>
-            <h2>You Win!</h2>
+            <h2>!Has ganado!</h2>
             <p className="solution">{solution}</p>
-            <p>You found the solution in {turn} guesses</p>
+            <p>Has encontrado la solución en {turn} intentos</p>
           </div>
         )}
         {!isCorrect && (
           <div>
-            <h1>Nevermind</h1>
+            <h1>No importa</h1>
             <p className="solution">{solution}</p>
-            <p>Better luck next time</p>
+            <p>Mejor suerte la próxima vez</p>
           </div>
         )}
       </Modal>

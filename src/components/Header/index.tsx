@@ -4,12 +4,7 @@
 import { useState } from 'react';
 import Icon, { IconType, IconSize } from '../Icon';
 import Modal, { ModalSize } from '../Modal';
-
-interface HeaderProps {
-  className?: string;
-  toggleDarkMode?: () => void;
-  isDarkMode?: boolean;
-}
+import useStats from '../../hooks/useStats';
 
 const firstExample = [
   { key: 1, letter: 'g', style: 'green' },
@@ -48,15 +43,40 @@ const getLetterStyle = (style?: string) => {
   }
 };
 
-function Header({ className, toggleDarkMode, isDarkMode }: HeaderProps) {
-  const [showModal, setShowModal] = useState(true);
+interface HeaderProps {
+  className?: string;
+  toggleDarkMode?: () => void;
+  isDarkMode?: boolean;
+  startTimer: () => void;
+  countdown?: string;
+}
+
+function Header({
+  className,
+  toggleDarkMode,
+  isDarkMode,
+  startTimer,
+  countdown,
+}: HeaderProps) {
+  const [showRulesModal, setShowRulesModal] = useState(true);
+  const [showChartModal, setShowChartModal] = useState(false);
+  const { gamesPlayed, victories } = useStats();
+
+  const handleCloseRulesModal = () => {
+    setShowRulesModal(false);
+    startTimer();
+  };
+
+  const handleCloseChartModal = () => {
+    setShowChartModal(false);
+  };
   return (
     <div
       className={`flex w-full justify-between items-center px-5 py-4 rounded-2xl bg-white-300 mb-20 dark:bg-dark-gray-300 dark:text-dark-base-100 ${
         className ?? ''
       }`}
     >
-      <button type="button" onClick={() => setShowModal((prev) => !prev)}>
+      <button type="button" onClick={() => setShowRulesModal((prev) => !prev)}>
         <Icon
           className="text-gray-500 dark:text-dark-base-100"
           type={'circle-question' as IconType}
@@ -66,11 +86,16 @@ function Header({ className, toggleDarkMode, isDarkMode }: HeaderProps) {
         Wordle
       </h1>
       <div className="flex items-center">
-        <Icon
-          className="text-gray-500 mr-3 dark:text-dark-base-100 dark:stroke-black"
-          type={'chart' as IconType}
-          size={IconSize.LARGE}
-        />
+        <button
+          type="button"
+          onClick={() => setShowChartModal((prev) => !prev)}
+        >
+          <Icon
+            className="text-gray-500 mr-3 dark:text-dark-base-100 dark:stroke-black"
+            type={'chart' as IconType}
+            size={IconSize.LARGE}
+          />
+        </button>
         <label
           htmlFor="switch"
           className={`switch ${isDarkMode ? 'dark' : 'light'}`}
@@ -89,8 +114,8 @@ function Header({ className, toggleDarkMode, isDarkMode }: HeaderProps) {
       </div>
       <Modal
         size={ModalSize.MEDIUM}
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
+        isOpen={showRulesModal}
+        onClose={handleCloseRulesModal}
       >
         <h2 className="text-center text-lg md:text-subtext mb-8">Cómo jugar</h2>
         <p className="leading-6	mb-4">
@@ -165,9 +190,40 @@ function Header({ className, toggleDarkMode, isDarkMode }: HeaderProps) {
           <button
             className="bg-primary text-white px-8 py-2 rounded-md uppercase font-bold tracking-wider"
             type="button"
-            onClick={() => setShowModal(false)}
+            onClick={handleCloseRulesModal}
           >
             ¡Jugar!
+          </button>
+        </div>
+      </Modal>
+      <Modal
+        size={ModalSize.MEDIUM}
+        isOpen={showChartModal}
+        onClose={handleCloseChartModal}
+      >
+        <h2 className="text-center text-lg md:text-subtext mb-8">
+          Estadísticas
+        </h2>
+        <div className="w-full flex justify-between mb-14">
+          <div className="flex flex-col items-center w-1/2">
+            <p className="text-subtext font-bold">{gamesPlayed}</p>
+            <p className="text-lg">Jugadas</p>
+          </div>
+          <div className="flex flex-col items-center w-1/2">
+            <p className="text-subtext font-bold">{victories}</p>
+            <p className="text-lg">Victorias</p>
+          </div>
+        </div>
+        <p className="text-center text-lg uppercase mb-4">Siguiente palabra</p>
+        <p className="text-center text-xl font-bold mb-8">{countdown}</p>
+
+        <div className="w-full flex justify-center">
+          <button
+            className="bg-primary text-white px-8 py-2 rounded-md uppercase font-bold tracking-wider"
+            type="button"
+            onClick={handleCloseChartModal}
+          >
+            Aceptar
           </button>
         </div>
       </Modal>
