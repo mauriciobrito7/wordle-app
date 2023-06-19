@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
+import useGameTimer from './hooks/useGameTimer';
 import WORDS from './constants/words';
 
 import Header from './components/Header';
@@ -9,7 +10,7 @@ function App() {
   const [solution, setSolution] = useState<string | null>(null);
   const lastWord = useRef(solution);
 
-  const selectRandomWord = () => {
+  const selectRandomWord = useCallback(() => {
     let newWord;
     do {
       const randomIndex = Math.floor(Math.random() * WORDS.length);
@@ -18,17 +19,16 @@ function App() {
 
     lastWord.current = newWord;
     setSolution(newWord);
-  };
+  }, []);
+
+  const { startTimer, countdown } = useGameTimer({
+    initialCountdown: 300,
+    onTimeEnd: selectRandomWord,
+  });
 
   useEffect(() => {
     selectRandomWord();
-
-    const intervalId = setInterval(() => {
-      selectRandomWord();
-    }, 5 * 60 * 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
+  }, [selectRandomWord, startTimer]);
 
   useEffect(() => {
     const { body } = window.document;
@@ -47,7 +47,12 @@ function App() {
   return (
     <div className="flex flex-col items-center h-full w-full text-black bg-white-200 dark:bg-dark-200 dark:text-white">
       <div className="flex flex-col w-full px-4 md:max-w-2xl mt-20 md:p-0">
-        <Header toggleDarkMode={toggleDarkMode} isDarkMode={darkMode} />
+        <Header
+          startTimer={startTimer}
+          toggleDarkMode={toggleDarkMode}
+          isDarkMode={darkMode}
+          countdown={countdown}
+        />
       </div>
       <div className="flex flex-col w-full px-4 md:max-w-2xl md:p-0">
         {solution && <Wordle solution={solution} />}
