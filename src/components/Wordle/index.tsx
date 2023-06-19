@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import useWordle from '../../hooks/useWordle';
+import useStats from '../../hooks/useStats';
 
 import Keypad from '../Keypad';
 import Grid from '../Grid';
 import Modal, { ModalSize } from '../Modal';
-import useStats from '../../hooks/useStats';
 
 interface WordleProps {
   solution: string;
+  resetTimer: () => void;
 }
 
-export default function Wordle({ solution }: WordleProps) {
+export default function Wordle({ solution, resetTimer }: WordleProps) {
   const {
     currentGuess,
     guesses,
@@ -19,6 +20,7 @@ export default function Wordle({ solution }: WordleProps) {
     usedKeys,
     handleKeyup,
     handleClick,
+    restartGame,
   } = useWordle(solution);
   const [showModal, setShowModal] = useState(false);
   const { incrementGamesPlayed, incrementVictories } = useStats();
@@ -44,7 +46,13 @@ export default function Wordle({ solution }: WordleProps) {
         incrementVictories();
       }
     }
-  }, [isCorrect, turn, incrementGamesPlayed, incrementVictories]);
+  }, [isCorrect, turn, incrementGamesPlayed, incrementVictories, restartGame]);
+
+  const handleCloseModal = () => {
+    restartGame();
+    resetTimer();
+    setShowModal(false);
+  };
 
   return (
     <div className="w-full">
@@ -53,22 +61,39 @@ export default function Wordle({ solution }: WordleProps) {
       <Modal
         size={ModalSize.MEDIUM}
         isOpen={showModal}
-        onClose={() => setShowModal(false)}
+        onClose={handleCloseModal}
       >
         {isCorrect && (
           <div>
-            <h2>!Has ganado!</h2>
-            <p className="solution">{solution}</p>
-            <p>Has encontrado la solución en {turn} intentos</p>
+            <h2 className="text-center text-lg mb-4 md:text-subtext">
+              !Has ganado!
+            </h2>
+            <p className="leading-6	mb-4">{solution}</p>
+            <p className="leading-6	mb-4">
+              Has encontrado la solución en <strong>{turn}</strong> intentos
+            </p>
           </div>
         )}
         {!isCorrect && (
           <div>
-            <h1>No importa</h1>
-            <p className="solution">{solution}</p>
-            <p>Mejor suerte la próxima vez</p>
+            <h2 className="text-center text-lg mb-4 md:text-subtext">
+              No importa
+            </h2>
+            <p className="leading-6	mb-4">
+              La palabra era: <strong>{solution}</strong>
+            </p>
+            <p className="leading-6	mb-8">Mejor suerte la próxima vez</p>
           </div>
         )}
+        <div className="w-full flex justify-center">
+          <button
+            className="bg-primary text-white px-8 py-2 rounded-md uppercase font-bold tracking-wider"
+            type="button"
+            onClick={handleCloseModal}
+          >
+            Aceptar
+          </button>
+        </div>
       </Modal>
     </div>
   );

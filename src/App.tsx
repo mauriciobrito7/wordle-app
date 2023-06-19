@@ -21,7 +21,7 @@ function App() {
     setSolution(newWord);
   }, []);
 
-  const { startTimer, countdown } = useGameTimer({
+  const { startTimer, countdown, resetTimer } = useGameTimer({
     initialCountdown: 300,
     onTimeEnd: selectRandomWord,
   });
@@ -55,7 +55,7 @@ function App() {
         />
       </div>
       <div className="flex flex-col w-full px-4 md:max-w-2xl md:p-0">
-        {solution && <Wordle solution={solution} />}
+        {solution && <Wordle resetTimer={resetTimer} solution={solution} />}
       </div>
     </div>
   );

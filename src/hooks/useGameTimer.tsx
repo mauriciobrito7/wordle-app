@@ -10,6 +10,7 @@ export default function useGameTimer({
   onTimeEnd,
 }: UseGameTimerProps) {
   const [countdown, setCountdown] = useState(initialCountdown);
+  const [countdownStr, setCountdownStr] = useState('');
   const [isPaused, setIsPaused] = useState(true);
   const intervalId = useRef<number | null>(null);
 
@@ -26,7 +27,8 @@ export default function useGameTimer({
 
   const resetTimer = useCallback(() => {
     setCountdown(initialCountdown);
-  }, [initialCountdown]);
+    onTimeEnd();
+  }, [initialCountdown, onTimeEnd]);
 
   useEffect(() => {
     if (!isPaused) {
@@ -49,11 +51,13 @@ export default function useGameTimer({
     };
   }, [isPaused, countdown, onTimeEnd, resetTimer]);
 
-  const minutes = Math.floor(countdown / 60);
-  const seconds = countdown % 60;
-  const minutesStr = `0${minutes}`.slice(-2);
-  const secondsStr = `0${seconds}`.slice(-2);
-  const countdownStr = `${minutesStr}:${secondsStr}`;
+  useEffect(() => {
+    const minutes = Math.floor(countdown / 60);
+    const seconds = countdown % 60;
+    const minutesStr = `0${minutes}`.slice(-2);
+    const secondsStr = `0${seconds}`.slice(-2);
+    setCountdownStr(`${minutesStr}:${secondsStr}`);
+  }, [countdown]);
 
   return {
     countdown: countdownStr,

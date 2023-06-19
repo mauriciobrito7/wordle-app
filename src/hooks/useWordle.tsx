@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { Guess, KeyColor } from '../types/wordle';
 
 const useWordle = (solution: string) => {
@@ -10,14 +10,18 @@ const useWordle = (solution: string) => {
   const [isCorrect, setIsCorrect] = useState<boolean>(false);
   const [usedKeys, setUsedKeys] = useState<KeyColor>({});
 
-  useEffect(() => {
+  const restartGame = useCallback(() => {
     setTurn(0);
     setCurrentGuess('');
     setGuesses(Array(6).fill([]));
     setHistory([]);
     setIsCorrect(false);
     setUsedKeys({});
-  }, [solution]);
+  }, []);
+
+  useEffect(() => {
+    restartGame();
+  }, [restartGame, solution]);
 
   const formatGuess = (): Guess => {
     const solutionArray: (string | null)[] = [...solution];
@@ -137,6 +141,7 @@ const useWordle = (solution: string) => {
     usedKeys,
     handleKeyup,
     handleClick,
+    restartGame,
   };
 };
 
