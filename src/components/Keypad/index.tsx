@@ -1,5 +1,6 @@
 import Key from '../../types/key';
 import LETTERS from '../../constants/letters';
+import { Color, KeyColor } from '../../types/wordle';
 
 import Icon, { IconType, IconSize } from '../Icon';
 
@@ -14,23 +15,23 @@ const getAlignmentClass = (index: number) => {
   return 'justify-center md:justify-start md:ml-5';
 };
 
-const getButtonClass = (state?: string) => {
-  switch (state) {
-    case 'active':
+const getButtonClass = (color?: Color) => {
+  switch (color) {
+    case 'green':
       return 'bg-primary text-white';
-    case 'disabled':
+    case 'gray':
       return 'bg-gray-500 text-white';
     default:
       return 'bg-gray-300 dark:bg-dark-gray-100';
   }
 };
 
-export default function Keypad() {
-  const handleClick = () => {
-    // eslint-disable-next-line no-console
-    console.log('Click!');
-  };
+interface KeypadProps {
+  usedKeys: KeyColor;
+  handleClick: (key: string) => void;
+}
 
+export default function Keypad({ usedKeys, handleClick }: KeypadProps) {
   const lastRow = LETTERS[LETTERS.length - 1].concat([{ key: 'delete' }]);
   const rows = [
     ...LETTERS.slice(0, LETTERS.length - 1),
@@ -50,10 +51,13 @@ export default function Keypad() {
             {row.map((letter: Key) => {
               return (
                 <button
-                  className={`flex justify-center items-center px-2 h-[3.18rem] m-1 rounded-md uppercase font-medium sm:px-3 md:min-w-[2.79rem] ${getButtonClass()}`}
+                  className={`flex justify-center items-center px-2 h-[3.18rem] m-1 rounded-md uppercase font-medium sm:px-3 md:min-w-[2.79rem] ${getButtonClass(
+                    usedKeys ? usedKeys[letter.key] : undefined
+                  )}`}
                   key={letter.key}
-                  onClick={handleClick}
+                  onClick={() => handleClick(letter.key)}
                   type="button"
+                  disabled={usedKeys && usedKeys[letter.key] === 'gray'}
                 >
                   {letter.key === 'delete' ? (
                     <Icon type={'delete' as IconType} size={IconSize.SMALL} />
